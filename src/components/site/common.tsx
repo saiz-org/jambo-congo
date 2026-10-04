@@ -92,11 +92,12 @@ export function FeatureCard({ feature, index }: { feature: Feature; index: numbe
       style={{ rotateX: rx, rotateY: ry, transformPerspective: 900, ["--mx" as string]: mx, ["--my" as string]: my }}
       className="group relative h-full overflow-hidden rounded-lg border border-border bg-card p-7 shadow-soft transition-shadow ease-jacco hover:shadow-lift sm:p-8"
     >
+      <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-primary transition-transform duration-500 group-hover:scale-x-100" />
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{ background: "radial-gradient(400px circle at calc(var(--mx) * 1%) calc(var(--my) * 1%), color-mix(in oklab, var(--primary) 12%, transparent), transparent 60%)" }}
       />
-      <span className="absolute right-6 top-5 font-display text-5xl font-extrabold text-surface transition-colors duration-300 group-hover:text-primary/10">
+      <span className="absolute right-6 top-5 font-display text-5xl font-extrabold text-primary/10 transition-colors duration-300 group-hover:text-primary/25">
         0{index + 1}
       </span>
       <div className="relative mb-6 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-gradient-primary text-primary-foreground shadow-[var(--shadow-primary)] transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110">

@@ -139,7 +139,7 @@ function ParallaxPhoto({ src, alt, offset }: { src: string; alt: string; offset:
 
 export function Infrastructure() {
   return (
-    <section id="infrastructure" className="bg-surface py-20 md:py-32">
+    <section id="infrastructure" className="bg-warm-mesh py-20 md:py-32">
       <div className="mx-auto max-w-6xl px-4">
         <SectionHeader eyebrow="Notre site" title={infrastructure.title} subtitle={infrastructure.subtitle} />
         <FeatureGrid features={infrastructure.features} />
@@ -155,7 +155,7 @@ export function Infrastructure() {
 
 export function Vision() {
   return (
-    <section id="vision" className="bg-background py-20 md:py-32">
+    <section id="vision" className="bg-dots py-20 md:py-32">
       <div className="mx-auto max-w-6xl px-4">
         <SectionHeader eyebrow="Demain" title={vision.title} subtitle={vision.subtitle} />
         <FeatureGrid features={vision.features} />
