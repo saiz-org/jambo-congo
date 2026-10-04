@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "@tanstack/react-router";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Mail, MapPin, Quote } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
@@ -184,6 +185,10 @@ export function MainClient() {
             <Quote className="absolute -top-4 left-6 h-8 w-8 rounded-full bg-gradient-primary p-1.5 text-primary-foreground" />
             <p className="text-lg leading-relaxed text-primary-foreground/80">{mainClient.text}</p>
           </div>
+          <Link to="/kibali" className="btn-primary group mt-8 inline-flex items-center gap-2 rounded-full px-7 py-4 font-semibold">
+            Voir plus sur Kibali
+            <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
         </Reveal>
         <motion.div style={{ scale, borderRadius: radius }} className="overflow-hidden shadow-lift">
           <img src={kibaliImg} alt={mainClient.imageAlt} loading="lazy" width={1200} height={800} className="h-full w-full object-cover" />

@@ -112,3 +112,52 @@ export const stats = [
 ];
 
 export const marquee = ["Gaz industriel", "Gaz domestique", "Sécurité", "Fiabilité", "Durabilité", "Haut-Uele", "Innovation"];
+
+export const kibaliPage = {
+  eyebrow: "Notre client principal",
+  title: "KIBALI GOLD MINE",
+  intro:
+    "Plus grande mine d'or d'Afrique, Kibali est implantée dans le Haut-Uele, à quelques kilomètres de Doko. Opérée par Barrick, elle est devenue en dix ans un moteur de développement pour tout le nord-est de la RDC — et JACCO est fier d'accompagner ce partenaire au quotidien.",
+  figures: [
+    { value: "6,3 Md$", label: "investis en RDC depuis l'origine du projet" },
+    { value: "3,1 Md$", label: "versés aux entreprises et fournisseurs congolais" },
+    { value: "95 %", label: "d'employés congolais, direction générale comprise" },
+    { value: "~85 %", label: "d'électricité d'origine renouvelable" },
+  ],
+  pillars: [
+    {
+      title: "Un moteur économique pour le Haut-Uele",
+      text: "Kibali est le premier contributeur économique du nord-est de la RDC. Sa politique d'achats locaux a transformé la région en un véritable pôle commercial, autour de Doko et Durba.",
+    },
+    {
+      title: "Des entreprises locales accompagnées",
+      text: "La mine accompagne la croissance des PME congolaises en renforçant leurs compétences techniques et commerciales. Sa troisième centrale hydroélectrique, Azambi, a été construite par une équipe entièrement congolaise.",
+    },
+    {
+      title: "Une énergie verte et locale",
+      text: "Trois centrales hydroélectriques au fil de l'eau (Nzoro, Ambaru, Azambi), complétées par une centrale solaire et des batteries, font de Kibali l'une des mines les plus vertes du continent.",
+    },
+    {
+      title: "Des projets pour les communautés",
+      text: "Un fonds de développement communautaire alimenté par 0,3 % du chiffre d'affaires finance chaque année des dizaines de projets — écoles, santé, eau, agriculture — ainsi que le programme du Cahier des Charges.",
+    },
+    {
+      title: "La biodiversité protégée",
+      text: "Kibali soutient le Parc national de la Garamba, voisin de la mine, notamment à travers la réintroduction du rhinocéros blanc dans la région.",
+    },
+    {
+      title: "Des Congolais aux commandes",
+      text: "Sur plus de 6 500 collaborateurs, 95 % sont congolais. Une démonstration qu'une mine de classe mondiale peut être dirigée par des talents nationaux.",
+    },
+  ],
+  partnership: {
+    title: "JACCO, partenaire de proximité",
+    text: "Installé à Doko depuis 2016, JACCO fournit à Kibali le gaz industriel indispensable à ses opérations. Cette relation illustre la vision de la mine : s'appuyer sur des entreprises congolaises fiables, implantées au cœur du Haut-Uele, pour créer de la valeur qui reste dans la région.",
+  },
+  sources: [
+    { label: "Barrick — Kibali continue de croître (2025)", href: "https://www.barrick.com/English/news/news-details/2025/kibali-continues-to-deliver-growth/default.aspx" },
+    { label: "Barrick — Kibali et l'ARSP pour le contenu local (2024)", href: "https://www.barrick.com/English/news/news-details/2024/kibali-and-DRC-partner-to-promote-local-content/default.aspx" },
+    { label: "Barrick — L'une des mines les plus vertes d'Afrique (2024)", href: "https://www.barrick.com/English/news/news-details/2024/africas-largest-gold-mine-now-also-one-of-its-greenest/default.aspx" },
+    { label: "Barrick — Un développement fondé sur les partenariats (2023)", href: "https://www.barrick.com/English/news/news-details/2023/pioneering-kibali-plans-further-partner-based-development/default.aspx" },
+  ],
+};
