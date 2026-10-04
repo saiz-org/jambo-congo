@@ -1,5 +1,7 @@
 import type { LucideIcon } from "lucide-react";
-import { Zap, BarChart3, Leaf, Users, Home, Shield, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Zap, BarChart3, Leaf, Users, Home, Shield } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+import { Facebook, XTwitter as Twitter, Linkedin, Instagram } from "@/components/site/BrandIcons";
 import infra1 from "@/assets/infra_1.jpg";
 import infra2 from "@/assets/infra_2.jpg";
 import infra3 from "@/assets/infra_3.jpg";
@@ -10,7 +12,7 @@ import vision3 from "@/assets/vision_3.jpg";
 export type Feature = { icon: LucideIcon; title: string; text: string };
 export type Slide = { image: string; title: string; text: string };
 export type NavLink = { label: string; href: string };
-export type Social = { label: string; href: string; icon: LucideIcon };
+export type Social = { label: string; href: string; icon: ComponentType<SVGProps<SVGSVGElement>> };
 
 export const nav: NavLink[] = [
   { label: "Accueil", href: "#home" },
