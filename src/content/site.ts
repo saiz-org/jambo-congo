@@ -103,3 +103,12 @@ export const notFound = {
     { label: "Contact", href: "/#contact" },
   ] as NavLink[],
 };
+
+export const stats = [
+  { value: "2016", label: "Année de création" },
+  { value: "Doko", label: "Haut-Uele, RDC" },
+  { value: "24/7", label: "Production continue" },
+  { value: "Kibali", label: "Client principal" },
+];
+
+export const marquee = ["Gaz industriel", "Gaz domestique", "Sécurité", "Fiabilité", "Durabilité", "Haut-Uele", "Innovation"];
