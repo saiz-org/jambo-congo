@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { About, Footer, Hero, Infrastructure, MainClient, Vision } from "@/components/site/Sections";
 import { Contact } from "@/components/site/Contact";
+import { Marquee } from "@/components/site/common";
+import { marquee } from "@/content/site";
 
 const title = "Jacco — JAMBO CONGO COMPANY";
 const description =
@@ -28,6 +30,7 @@ function Index() {
       <main>
         <Hero />
         <About />
+        <Marquee items={marquee} />
         <Infrastructure />
         <Vision />
         <MainClient />
