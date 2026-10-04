@@ -16,7 +16,7 @@ const schema = z.object({
 });
 type Values = z.infer<typeof schema>;
 
-function Field({ id, label, error, children }: { id: string; label: string; error?: string; children: React.ReactNode }) {
+function Field({ id, label, error, children }: { id: string; label: string; error?: string | undefined; children: React.ReactNode }) {
   return (
     <div>
       <label htmlFor={id} className="mb-2 block font-semibold text-ink">{label}</label>
