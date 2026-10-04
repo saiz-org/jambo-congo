@@ -1,6 +1,8 @@
-import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import type { MouseEvent, ReactNode } from "react";
 import type { Feature } from "@/content/site";
+
+export const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Reveal({
   children,
@@ -10,19 +12,20 @@ export function Reveal({
 }: {
   children: ReactNode;
   delay?: number;
-  from?: "up" | "left" | "right";
+  from?: "up" | "left" | "right" | "scale";
   className?: string;
 }) {
   const reduce = useReducedMotion();
   if (reduce) return <div className={className}>{children}</div>;
-  const offset = from === "up" ? { y: 30 } : { x: from === "left" ? -40 : 40 };
+  const offset =
+    from === "up" ? { y: 40 } : from === "scale" ? { scale: 0.94 } : { x: from === "left" ? -60 : 60 };
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, ...offset }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.8, delay, ease: [0.4, 0, 0.2, 1] }}
+      initial={{ opacity: 0, filter: "blur(6px)", ...offset }}
+      whileInView={{ opacity: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)" }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.9, delay, ease }}
     >
       {children}
     </motion.div>
@@ -31,31 +34,77 @@ export function Reveal({
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <span className={`text-2xl font-extrabold transition-colors ease-jacco hover:text-primary ${className}`}>
+    <span className={`font-display text-2xl font-extrabold tracking-tight transition-colors ease-jacco hover:text-primary ${className}`}>
       Jacco<span className="text-primary">.</span>
     </span>
   );
 }
 
-export function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }) {
+export function SectionHeader({
+  eyebrow,
+  title,
+  subtitle,
+  align = "center",
+  dark = false,
+}: {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  align?: "center" | "left";
+  dark?: boolean;
+}) {
   return (
-    <Reveal className="mx-auto mb-12 max-w-3xl text-center">
-      <h2 className="text-[1.8rem] text-ink md:text-[2.5rem]">{title}</h2>
-      {subtitle && <p className="mt-4 text-lg text-ink-muted">{subtitle}</p>}
+    <Reveal className={`mb-14 max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}>
+      {eyebrow && <span className="eyebrow mb-4">{eyebrow}</span>}
+      <h2 className={`text-[2rem] md:text-[3rem] ${dark ? "text-primary-foreground" : "text-ink"}`}>{title}</h2>
+      {subtitle && (
+        <p className={`mt-5 text-lg ${dark ? "text-primary-foreground/70" : "text-ink-muted"}`}>{subtitle}</p>
+      )}
     </Reveal>
   );
 }
 
-export function FeatureCard({ feature }: { feature: Feature }) {
+/** Card with a cursor-following glow and subtle 3D tilt. */
+export function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
   const Icon = feature.icon;
+  const reduce = useReducedMotion();
+  const rx = useSpring(useMotionValue(0), { stiffness: 200, damping: 20 });
+  const ry = useSpring(useMotionValue(0), { stiffness: 200, damping: 20 });
+  const mx = useMotionValue(50);
+  const my = useMotionValue(50);
+
+  const onMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (reduce) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    mx.set(px * 100);
+    my.set(py * 100);
+    ry.set((px - 0.5) * 8);
+    rx.set(-(py - 0.5) * 8);
+  };
+  const onLeave = () => { rx.set(0); ry.set(0); };
+
   return (
-    <div className="lift h-full rounded-lg border border-border bg-card p-6 sm:p-8">
-      <div className="mb-5 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-gradient-primary text-primary-foreground">
+    <motion.div
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      style={{ rotateX: rx, rotateY: ry, transformPerspective: 900, ["--mx" as string]: mx, ["--my" as string]: my }}
+      className="group relative h-full overflow-hidden rounded-lg border border-border bg-card p-7 shadow-soft transition-shadow ease-jacco hover:shadow-lift sm:p-8"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{ background: "radial-gradient(400px circle at calc(var(--mx) * 1%) calc(var(--my) * 1%), color-mix(in oklab, var(--primary) 12%, transparent), transparent 60%)" }}
+      />
+      <span className="absolute right-6 top-5 font-display text-5xl font-extrabold text-surface transition-colors duration-300 group-hover:text-primary/10">
+        0{index + 1}
+      </span>
+      <div className="relative mb-6 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-gradient-primary text-primary-foreground shadow-[var(--shadow-primary)] transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110">
         <Icon className="h-7 w-7" aria-hidden />
       </div>
-      <h3 className="mb-3 text-xl text-ink">{feature.title}</h3>
-      <p className="text-ink-muted">{feature.text}</p>
-    </div>
+      <h3 className="relative mb-3 text-xl text-ink">{feature.title}</h3>
+      <p className="relative text-ink-muted">{feature.text}</p>
+    </motion.div>
   );
 }
 
@@ -64,9 +113,25 @@ export function FeatureGrid({ features }: { features: Feature[] }) {
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {features.map((f, i) => (
         <Reveal key={f.title} delay={i * 0.1}>
-          <FeatureCard feature={f} />
+          <FeatureCard feature={f} index={i} />
         </Reveal>
       ))}
+    </div>
+  );
+}
+
+export function Marquee({ items }: { items: string[] }) {
+  const row = [...items, ...items];
+  return (
+    <div className="overflow-hidden border-y border-primary-foreground/10 bg-ink-deep py-5" aria-hidden>
+      <div className="animate-marquee flex w-max gap-12 whitespace-nowrap">
+        {row.map((t, i) => (
+          <span key={i} className="flex items-center gap-12 font-display text-2xl font-semibold text-primary-foreground/80 md:text-3xl">
+            {t}
+            <span className="h-2 w-2 rounded-full bg-primary" />
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
