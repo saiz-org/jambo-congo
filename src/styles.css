@@ -52,6 +52,7 @@
   --overlay: oklch(0 0 0);
   --ink-deep: oklch(0.2 0.03 252);
   --glow: oklch(0.75 0.17 55);
+  --warm: oklch(0.972 0.016 62);
   --background: oklch(1 0 0);
   --foreground: var(--ink);
   --card: oklch(1 0 0);
@@ -167,3 +168,16 @@
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @utility animate-marquee { animation: marquee 30s linear infinite; }
 @media (prefers-reduced-motion: reduce) { .animate-marquee { animation: none; } }
+@utility bg-warm-mesh {
+  background-color: var(--warm);
+  background-image:
+    radial-gradient(600px circle at 0% 0%, oklch(0.675 0.19 44 / 10%), transparent 60%),
+    radial-gradient(700px circle at 100% 100%, oklch(0.75 0.17 55 / 12%), transparent 60%);
+}
+@utility bg-dots {
+  background-color: var(--surface);
+  background-image:
+    radial-gradient(800px circle at 50% 0%, oklch(0.675 0.19 44 / 8%), transparent 60%),
+    radial-gradient(circle at 1px 1px, oklch(0.345 0.04 250 / 9%) 1px, transparent 0);
+  background-size: 100% 100%, 22px 22px;
+}
