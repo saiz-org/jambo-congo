@@ -90,7 +90,7 @@ export const socials: Social[] = [
 
 export const footer = {
   tagline: "Fournisseur leader de solutions énergétiques en République Démocratique du Congo",
-  credits: "JAMBO CONGO COMPANY. Tous droits réservés | Développé par Joyce Sabwe",
+  credits: "JAMBO CONGO COMPANY. Tous droits réservés | Développé par Joyce Sabwe Saiz",
 };
 
 export const notFound = {
